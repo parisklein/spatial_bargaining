@@ -1,0 +1,28 @@
+.sidebar{
+    flex: 1;
+    height:100vh;
+    background-color: ghostwhite;
+    position: sticky;
+    top: 50px;
+}
+
+.sidebarWrapper{
+    padding: 20px;
+}
+
+.sidebarTitle{
+    font-size: 20px;
+    color: lightgray;
+    padding: 5px
+}
+
+.sidebarList{
+    list-style: none;
+    padding: 2px;
+}
+
+.sidebarListItem{
+    padding: 3px;
+    display: flex;
+    align-items: center;
+}
