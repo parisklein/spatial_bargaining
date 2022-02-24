@@ -1,11 +1,11 @@
 import React from 'react';
 import "./app.css"
 
-import BubbleChart from "./components/BubbleChart"
-//import DataInput2 from "./components/DataInput2"
-import Topbar from "./components/topbar/Topbar";
-import ResultTable from './components/ResultTable';
-import { Sidebar } from "./components/sidebar/Sidebar"
+import BubbleChart from "./BubbleChart"
+//import DataInput2 from "./DataInput2"
+import Topbar from "./topbar/Topbar";
+import ResultTable from './ResultTable';
+import { Sidebar } from "./sidebar/Sidebar"
 import { Component } from 'react';
 
 

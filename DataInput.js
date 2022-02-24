@@ -6,6 +6,17 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
+
+// I first tried to change each x, y, value into their  own states. Once I did that the problem was that all x and y input fields would print the same thing as if they were connected to one single array. 
+
+// Since I did not have luck with that, I decided to go back to using the array method with the map function. This leads me to the current issue. 
+
+// The problem: Using an array with the map function, I am not sure how to access the data that is inside of each x, y input field. For example, how do I access the x value from the second array? 
+
+// Aside from this problem, I am having an error pop up when I include the button key which we added last time we met. For now I have commented that out.
+
+// I look forward to discussing this further with you during our upcoming meeting.
+
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -73,20 +84,20 @@ export class DataInput2 extends React.Component {
 
   
 
-    inputArray = { Stakeholder: '', x: '', y: '' , idx: ''}
-
-    //inputArray = [{ Stakeholder: '', x: '', y: '' }, { Stakeholder: '', x: '', y: '' }]
-    //[inputFields, setInputFields] = useState([inputArray])
-        //handleSubmit = () => {
-        //    const value = this.state.value;
-        //}
 
     handleClick() {
-     //   event.preventDefault();
-            console.log("HEY THERE");
-            //console.log(this.state.inputFields[1].x)
+       event.preventDefault();
+        const inputArray = { Stakeholder: '', x: '', y: '' , idx: ''}
+        //create variables to represent totals for x,y, etc
+        //Get state value for all inputs
+        //loop and visit each index
+        //do some math add values at index to total
+        // this.setState([...this.state.inputArray, inputArray])
+        // inputArray = [{ Stakeholder: '', x: '', y: '' }, { Stakeholder: '', x: '', y: '' }]
     }
-
+    handleSubmit = () => {
+        const value = this.state.value;
+     }
     handleAdd() {
         this.state.inputFields.push({ Stakeholder: '', x: '', y: '' })
         this.setState({ inputFields: this.state.inputFields })
@@ -108,47 +119,56 @@ export class DataInput2 extends React.Component {
     //inputFields = [{ Stakeholder: '', x: '', y: '' }]
 
 
-    handleChangeInput(event,index) {
-        //event.preventDefault()
-        const update_vals = [...this.state.inputFields];
-        console.log(update_vals);
-        console.log(index);
+    handleChangeInput(event, index, axis) {
+        event.preventDefault();
+        const updatedValue = event.target.value;
+        let inputFields = this.state.inputFields;
+        let inputFieldToUpdate = inputFields[index];
+        // inputFieldToUpdate = Object.assign({}, inputFieldToUpdate, { [axis]: updatedValue })
+        inputFieldToUpdate[axis] = updatedValue;
+        const updatedInputFields = inputFields.map((inputFiled, i) => {
+            if (i === index) {
+                return inputFieldToUpdate;
+            } else {
+                return inputFields[i];
+            }
+        });
+        this.setState({ inputFields: updatedInputFields });
+    }
         //let val = update_vals[index];
-        //val.x = event.target.value;
         //update_vals[index] = val;
         //this.setState({inputFields: update_vals})
         //setInputFields(values);
         //this.setState({ value: event.target.value });
        // this.setState({ inputFields.x: event.target.value });   
         //this.handleChangeInput = this.handleChangeInput`.bind(this)
-    }
 
 
     render() {
         return (
             <Container>
-                {this.state.inputFields.map((inputFields, index) => (
+                {this.state.inputFields.map((inputField, index) => (
                     <div key={index}>
                         <TextField
                             name="Stakeholder"
                             label="Stakeholder"
                             variant='filled'
                             value=''
-                           // onChange=vent => handleChangeInput(index, event)}
+                           onChange={event => handleChangeInput(event, index, 'Stakeholder')}
                         />
                         <TextField
                             name="x"
                             label="x"
                             variant='filled'
-                            value={inputFields.x}
-                            onChange={this.handleChangeInput.bind(this)}
+                            value={inputField.x}
+                            onChange={event => handleChangeInput(event, index, 'x')}
                         />
                         <TextField
                             name="y"
                             label="y"
                             variant='filled'
-                            value={inputFields.y}
-                            //onChange={event => handleChangeInput(index, event)}
+                            value={inputField.y}
+                            onChange={event => handleChangeInput(event, index, 'y')}
                          />
                         <IconButton
                             onClick={this.handleRemove.bind(this)}
