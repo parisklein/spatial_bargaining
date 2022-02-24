@@ -16,8 +16,6 @@ import { makeStyles } from '@material-ui/core/styles';
 };
 
 
-
-
     const handleCalculate = (inputFields) => {
 
         let xValues = inputFields.map(function (obj) { return parseFloat(obj.x) })
@@ -58,27 +56,42 @@ export class DataInput2 extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props)
         this.state = {
-            inputFields: [{ Stakeholder: '', x: '', y: '' }]
+            inputFields: [{ Stakeholder: '', x: '', y: '' }],
+            calculatedData: 0,
         };
+        this.handleChangeInput = this.handleChangeInput.bind(this)
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log(prevState)
+        console.log(this.state)
+
+    }
+
+
+  
 
     inputArray = { Stakeholder: '', x: '', y: '' , idx: ''}
 
     //inputArray = [{ Stakeholder: '', x: '', y: '' }, { Stakeholder: '', x: '', y: '' }]
-    //[inputFields, setInputFields] = useState([inputArray]);
+    //[inputFields, setInputFields] = useState([inputArray])
         //handleSubmit = () => {
         //    const value = this.state.value;
         //}
 
-        handleClick() {
+    handleClick() {
+     //   event.preventDefault();
             console.log("HEY THERE");
+            //console.log(this.state.inputFields[1].x)
     }
 
     handleAdd() {
         this.state.inputFields.push({ Stakeholder: '', x: '', y: '' })
         this.setState({ inputFields: this.state.inputFields })
     }
+
 
     handleRemove(index) {
         
@@ -94,30 +107,47 @@ export class DataInput2 extends React.Component {
 
     //inputFields = [{ Stakeholder: '', x: '', y: '' }]
 
+
+    handleChangeInput(event,index) {
+        //event.preventDefault()
+        const update_vals = [...this.state.inputFields];
+        console.log(update_vals);
+        console.log(index);
+        //let val = update_vals[index];
+        //val.x = event.target.value;
+        //update_vals[index] = val;
+        //this.setState({inputFields: update_vals})
+        //setInputFields(values);
+        //this.setState({ value: event.target.value });
+       // this.setState({ inputFields.x: event.target.value });   
+        //this.handleChangeInput = this.handleChangeInput`.bind(this)
+    }
+
+
     render() {
         return (
             <Container>
-                {this.state.inputFields.map((index) => (
+                {this.state.inputFields.map((inputFields, index) => (
                     <div key={index}>
                         <TextField
-                            name={index.x}
-                            label={index.x}
+                            name="Stakeholder"
+                            label="Stakeholder"
                             variant='filled'
-                            value={index.x}
-                            //onChange={event => handleChangeInput(index, event)}
+                            value=''
+                           // onChange=vent => handleChangeInput(index, event)}
                         />
                         <TextField
                             name="x"
                             label="x"
                             variant='filled'
-                            //value={inputField.x}
-                            //onChange={event => handleChangeInput(index, event) && this.getValue}
+                            value={inputFields.x}
+                            onChange={this.handleChangeInput.bind(this)}
                         />
                         <TextField
                             name="y"
                             label="y"
                             variant='filled'
-                            //value={inputField.y}
+                            value={inputFields.y}
                             //onChange={event => handleChangeInput(index, event)}
                          />
                         <IconButton
@@ -132,7 +162,7 @@ export class DataInput2 extends React.Component {
                         </IconButton>
                     </div>
                 ))}
-            <Button
+                <Button //key={index}
                 variant="contained"
                 color="grey"
                 type="submit"
@@ -142,4 +172,3 @@ export class DataInput2 extends React.Component {
         </Container>
     )
     }
-}
