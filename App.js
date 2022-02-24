@@ -1,55 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./app.css"
 
 import BubbleChart from "./components/BubbleChart"
-import DataInput from "./components/DataInput"
+//import DataInput2 from "./components/DataInput2"
 import Topbar from "./components/topbar/Topbar";
 import ResultTable from './components/ResultTable';
-import Sidebar from "./components/sidebar/Sidebar"
+import { Sidebar } from "./components/sidebar/Sidebar"
+import { Component } from 'react';
 
 
+export default class App extends React.Component {
+    constructor(props) {
 
-function App() {
+        super(props);
+        this.state = { Radius: 0, avg: 0, xVals: 0, yVals: 0 };
+    }
+    updateAppData(rSize, avg, xVal, yVal) {
+        this.setState({ Radius: rSize, average: avg, xVals: xVal, yVals: yVal });
 
-    state = {
-        title:'placeholder title'
+        console.log("rSize: ", rSize);
+        console.log("avg: ", avg);
+        console.log("xVal: ", xVal);
+        console.log("yVal: ", yVal);
+
+
     }
 
-    const handleCalculate = (e) => {
-        this.setState({
-            e.preventDefault();
-
-
-            const calculateAverage = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
-            let xValues = inputFields.map(function (obj) { return parseFloat(obj.x) })
-        let yValues = inputFields.map(function (obj) { return parseFloat(obj.y) })
-        var avg = { x: 0, y: 0 };
-            avg.x = parseFloat(calculateAverage(xValues).toFixed(2));
-            avg.y = parseFloat(calculateAverage(yValues).toFixed(2));
-
-            console.log("average of x:", avg.x);
-            console.log("average of y: ", avg.y);
-        });
-        //setResult(avg.x);
-    }
-
-
-    return(
-        <div>
-            <Topbar />
-            <div className="container">
-                <Sidebar handleCalculate={this.handleCalculate }title={this.state.title}/>
-                <div className="others">
-                    <BubbleChart />
-                    <ResultTable />
+    render() {
+        return (
+            <div>
+                <Topbar />
+                <div className="container">
+                    <Sidebar
+                        updateAppData={this.updateAppData.bind(this)}
+                    />
+                    <div className="others">
+                        <BubbleChart {...this.props} />
+                        <ResultTable />
+                    </div>
                 </div>
+
             </div>
-
-        </div>
-
-
-
-)
+        );
+    }
 }
-
-export default App;
