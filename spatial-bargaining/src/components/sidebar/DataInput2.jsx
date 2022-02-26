@@ -16,6 +16,10 @@ import { makeStyles } from '@material-ui/core/styles';
 };
 
 
+
+
+
+
     const handleCalculate = (inputFields) => {
 
         let xValues = inputFields.map(function (obj) { return parseFloat(obj.x) })
@@ -172,3 +176,4 @@ export class DataInput2 extends React.Component {
         </Container>
     )
     }
+}
