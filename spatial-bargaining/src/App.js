@@ -7,6 +7,7 @@ import Topbar from "./components/topbar/Topbar";
 import ResultTable from './components/ResultTable';
 import { Sidebar } from "./components/sidebar/Sidebar"
 import { Component } from 'react';
+import Chart from 'chart.js/auto';
 
 
 export default class App extends React.Component {
