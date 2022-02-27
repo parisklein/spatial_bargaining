@@ -4,8 +4,8 @@ import { DataInput2 } from "./DataInput2"
 
 
 export class Sidebar extends React.Component {
-    updateSidebarData(rSize, avg, xVal, yVal) {
-        this.props.updateAppData(rSize, avg, xVal, yVal);
+    updateSidebarData(inputFields) {
+        this.props.updateAppData(inputFields);
     }
 
 

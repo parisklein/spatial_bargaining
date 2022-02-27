@@ -10,51 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 
-const boxStyle = {
-    border: '1px solid red',
-    padding: '5px'
-};
-
-
-
-
-
-
-const handleCalculate = (inputFields) => {
-
-    let xValues = inputFields.map(function (obj) { return parseFloat(obj.x) })
-    let yValues = inputFields.map(function (obj) { return parseFloat(obj.y) })
-    var avg = { x: 0, y: 0 };
-    avg.x = parseFloat(calculateAverage(xValues).toFixed(2));
-    avg.y = parseFloat(calculateAverage(yValues).toFixed(2));
-
-    //console.log("average of x:", avg.x);
-    //console.log("average of y: ", avg.y);
-
-    // radisSizes is an array
-    var radiusSizes = calculateRadiusSizes(avg, inputFields);
-    //console.log("Radius: ", radiusSizes);
-
-    return [radiusSizes, avg, xValues, yValues];
-};
-
-const calculateRadiusSizes = function (avg, inputFields) {
-
-    let distances = inputFields.map(function (obj) {
-        return parseFloat(Math.sqrt((Math.pow((avg.x - obj.x), 2)) + (Math.pow((avg.y - obj.y), 2))).toFixed(2));
-
-    })
-    //console.log(distances);
-    return distances; // returns distances in an array
-
-}
-
-const calculateAverage = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
-
-//const handleAddFields = () => {
-//    setInputFields([...DataInput2.inputFields, { Stakeholder: '', x: '', y: '' }])
-//}
-
 
 export class DataInput2 extends React.Component {
 
@@ -75,22 +30,11 @@ export class DataInput2 extends React.Component {
     }
 
 
-
-
-    inputArray = { Stakeholder: '', x: '', y: '', idx: '' }
-
-    //inputArray = [{ Stakeholder: '', x: '', y: '' }, { Stakeholder: '', x: '', y: '' }]
-    //[inputFields, setInputFields] = useState([inputArray])
-    //handleSubmit = () => {
-    //    const value = this.state.value;
-    //}
-
-    handleClick() {
+    handleClick(event) {
         //event.preventDefault();
 
-        console.log("HEY THERE");
+        this.props.updateSidebarData(this.state.inputFields);
         //console.log(this.state.inputFields[1].x)
-        handleCalculate(this.state.inputFields)
     }
 
     handleAdd() {
@@ -105,15 +49,10 @@ export class DataInput2 extends React.Component {
         this.setState({ inputFields: this.state.inputFields });
         //const values = this.setState({ inputFields: [this.state.inputFields] });
     }
-    //handleClick(event) {
-    //    event.preventDefault();
-    //    var vars = handleCalculate();
-    //    this.props.updateSidebarData(vars[0], vars[1], vars[2], vars[3]);
-    //}
-
-    //inputFields = [{ Stakeholder: '', x: '', y: '' }]
 
 
+
+    // Handle when a sidebar form has a text input
     handleChangeInput(event, index, axis) {
         event.preventDefault()
         const updatedValue = event.target.value;
@@ -129,17 +68,7 @@ export class DataInput2 extends React.Component {
             }
         });
         this.setState({ inputFields: updatedInputFields });
-        //const update_vals = [...this.state.inputFields];
-        //        console.log(update_vals);
-        console.log(index);
-        //let val = update_vals[index];
-        //val.x = event.target.value;
-        //update_vals[index] = val;
-        //this.setState({inputFields: update_vals})
-        //setInputFields(values);
-        //this.setState({ value: event.target.value });
-        // this.setState({ inputFields.x: event.target.value });   
-        //this.handleChangeInput = this.handleChangeInput`.bind(this)
+
     }
 
 
@@ -168,7 +97,6 @@ export class DataInput2 extends React.Component {
                             variant='filled'
                             value={inputFields.y}
                             onChange={event => this.handleChangeInput(event, index, 'y')}
-                        //onChange={event => handleChangeInput(index, event)}
                         />
                         <IconButton
                             onClick={this.handleRemove.bind(this)}
