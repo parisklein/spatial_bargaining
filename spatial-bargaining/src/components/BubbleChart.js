@@ -4,24 +4,46 @@ import { Bubble } from 'react-chartjs-2';
 
 class Chart extends Component {
 
+
     componentDidUpdate() {
-        console.log("update chart", this.props.average  )
-            }
+        console.log("update chart", this.props.aver)
+        console.log("Stakeholders", this.props.Staks)
+        console.log("arraylength", this.props.inp.length)
+
+    }
+     //this.managers.forEach(manager => {
+     //    const newDataPoint = {
+     //        label: [manager.SecurityName],
+     //        backgroundColor: this.getRandomRGB(),
+     //        borderColor: this.getRandomRGB(),
+     //        data: [{
+     //            x: +manager[this.selectedX],
+     //            y: +manager[this.selectedY],
+     //            r: +manager[this.selectedR]
+     //        }],
+     //        radius: (+manager[this.selectedR] * 10)
+     //    };
+     //    this.chartDataSet.push(newDataPoint);
+     //});
+        
 
     render() {
-        
+
         return (
             <div className="chart">
                 <Bubble
                     data={{
-                        datasets: [{
-                            label: 'red',
-                            data: [{
-                                x: this.props.average,
-                                y: 3,
-                                r: this.props.average
+                        
+
+                        datasets: (this.props.Staks !== undefined) ?
+                            this.props.Staks.map((obj, index) => {
+                                return {
+                                    label: obj, data: [{ x: this.props.Xnumbers[index], y: this.props.Ynumbers[index], r: this.props.rad[index] }]
+                                }
+                            }) :
+                            [{
+                                label: '', data: [{ x: this.props.Xnumbers, y: this.props.Ynumbers, r: 40 }]
                             }]
-                        }]
                     }}
 
                 />
