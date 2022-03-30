@@ -8,7 +8,8 @@ export default function Topbar() {
         <div className="topbar">
             <div className="topbarWrapper">
                 <div className="topLeft">
-                    <span className="logo">Logo</span>
+{/*                    <span className="logo">Logo</span>*/}
+                    <img src="/backroomlogo.png" alt=""/>
                 </div>
                 <div className="topRight">
                     <div className="topbarIconContainer">

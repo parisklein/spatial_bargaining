@@ -87,6 +87,7 @@ export class DataInput2 extends React.Component {
                         <TextField
                             name="x"
                             label="x"
+                            
                             variant='filled'
                             value={inputFields.x}
                             onChange={event => this.handleChangeInput(event, index, 'x')}
@@ -94,6 +95,7 @@ export class DataInput2 extends React.Component {
                         <TextField
                             name="y"
                             label="y"
+                            
                             variant='filled'
                             value={inputFields.y}
                             onChange={event => this.handleChangeInput(event, index, 'y')}

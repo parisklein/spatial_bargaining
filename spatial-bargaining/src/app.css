@@ -3,7 +3,22 @@
 }
 
 .others {
+/*    width: 700px;
+    height: 700px;*/
     flex: 4;
     padding: 10px;
     align-items: center;
 }
+
+.bubbles {
+  /*  width: 700px;
+    height: 700px;*/
+    /*    flex: 4;
+    padding: 10px;
+    align-items: center;*/
+}
+
+/*.chartbox{
+    width: 700px;
+    height: 700px;
+}*/
